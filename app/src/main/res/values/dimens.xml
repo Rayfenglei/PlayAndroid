@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_text">16sp</dimen>
+    <dimen name="tab_bottom_image">32dp</dimen>
+    <dimen name="tab_bottom_text">12sp</dimen>
+    <dimen name="banner_dot">10dp</dimen>
+    <dimen name="banner_dot_interval">8dp</dimen>
+
+    <dimen name="recycler_text_size">14sp</dimen>
+    <dimen name="recycler_text_size_big">16sp</dimen>
+    <dimen name="bt_float_size">32dp</dimen>
+
+    <dimen name="bar_menu_size">14sp</dimen>
+    <dimen name="bar_title_size">14sp</dimen>
+
+    <dimen name="system_image_size">40dp</dimen>
+    <dimen name="system_first_item">18sp</dimen>
+    <dimen name="system_second_item">14sp</dimen>
+
+    <dimen name="my_bg_image">250dp</dimen>
+    <dimen name="image_circle">100dp</dimen>
+    <dimen name="user_name">20sp</dimen>
+</resources>

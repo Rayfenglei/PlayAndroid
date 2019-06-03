@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">PlayViewAndroid</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="repassword">确认密码</string>
+    <string name="login">登录</string>
+    <string name="exit">退出</string>
+    <string name="first_login">请先登录</string>
+    <string name="register">注册</string>
+    <string name="noregister">还没有账号？注册</string>
+    <string name="loginfailed">账号或者密码错误</string>
+    <string name="loginempty">账号密码不能为空</string>
+    <string name="registersuccess">注册成功</string>
+
+    <string name="bottom_tab_home">主页</string>
+    <string name="bottom_tab_project">项目</string>
+    <string name="bottom_tab_system">知识</string>
+    <string name="bottom_tab_public">公众号</string>
+    <string name="bottom_tab_my">我的</string>
+    <string name="searcher">搜索</string>
+
+    <string name="loading">正在加载</string>
+    <string name="load_end">没有更多</string>
+
+    <string name="share">分享</string>
+    <string name="article_share_error">分享失败</string>
+    <string name="collect">收藏</string>
+    <string name="collect_done">已收藏</string>
+    <string name="collect_success">收藏成功</string>
+    <string name="collect_cancel">取消收藏</string>
+    <string name="browser">浏览器打开</string>
+    <string name="open_browser_unknown">没有可用的浏览器</string>
+    <string name="share_unknown">找不到指定应用来分享</string>
+    <string name="share_email_unknown">找不到指定的应用来发送邮件</string>
+    <string name="article_browser_error">该链接无法使用浏览器打开</string>
+
+    <string name="hotkey">热词</string>
+    <string name="hotweb">网站</string>
+    <string name="delete">删除</string>
+    <string name="nohistory">没有搜素记录</string>
+
+    <string name="trans_edit">edit</string>
+    <string name="trans_image">image</string>
+
+    <string name="my_collect">我的收藏</string>
+    <string name="my_setting">设置</string>
+    <string name="my_about">关于我们</string>
+    <string name="my_login_out">退出登录</string>
+</resources>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_bg_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_person_jay"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_my_photo"
+        android:layout_width="@dimen/image_circle"
+        android:layout_height="@dimen/image_circle"
+        android:layout_marginBottom="64dp"
+        android:src="@drawable/test_jay"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:riv_border_color="#333333"
+        app:riv_border_width="2dp"
+        app:riv_oval="true" />
+
+    <Button
+        android:id="@+id/bt_my_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bt_login"
+        android:text="@string/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_my_photo" />
+
+    <TextView
+        android:id="@+id/tv_my_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/tab_text_selected"
+        android:textSize="@dimen/user_name"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_my_photo" />
+
+    <RelativeLayout
+        android:id="@+id/ll_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:id="@+id/iv_collect"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_person_collection"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/my_collect"
+            android:layout_toEndOf="@id/iv_collect"
+            android:layout_centerVertical="true"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_system_item_point"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ll_collect"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_person_setting"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/my_setting"
+            android:layout_toEndOf="@id/iv_setting"
+            android:layout_centerVertical="true"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_system_item_point"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ll_setting"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:id="@+id/iv_about"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_person_about"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/my_about"
+            android:layout_toEndOf="@id/iv_about"
+            android:layout_centerVertical="true"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_system_item_point"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/tab_text_selected"
+        android:text="@string/my_login_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_about" />
+</android.support.constraint.ConstraintLayout>

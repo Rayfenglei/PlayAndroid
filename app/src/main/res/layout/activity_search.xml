@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/searchRelative"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/tab_text_selected">
+        <ImageView
+            android:id="@+id/im_searcher_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_back"/>
+        <EditText
+            android:id="@+id/et_searcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_seacher"
+            android:textSize="@dimen/system_first_item"
+            android:paddingStart="30dp"
+            android:hint="@string/searcher"
+            android:transitionName="@string/trans_edit"/>
+        <ImageView
+            android:id="@+id/im_searcher"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="48dp"
+            android:layout_centerVertical="true"
+            android:transitionName="@string/trans_image"
+            android:background="@drawable/ic_search"/>
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/system_first_item"
+            android:text="@string/searcher" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_hotkey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hotkey"
+        android:layout_below="@id/searchRelative"
+        android:layout_marginTop="10dp"/>
+
+    <com.example.ray.playviewandroid.view.defineview.FlowLayout
+        android:id="@+id/flowlayout_hotkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hotkey"
+        android:layout_marginTop="10dp">
+
+    </com.example.ray.playviewandroid.view.defineview.FlowLayout>
+
+    <TextView
+        android:id="@+id/tv_hotweb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hotweb"
+        android:layout_below="@+id/flowlayout_hotkey"
+        android:layout_marginTop="10dp"/>
+
+    <com.example.ray.playviewandroid.view.defineview.FlowLayout
+        android:id="@+id/flowlayout_hotweb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hotweb"
+        android:layout_marginTop="10dp">
+    </com.example.ray.playviewandroid.view.defineview.FlowLayout>
+
+</RelativeLayout>
