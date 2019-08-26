@@ -8,4 +8,6 @@
     <color name="tab_text_selected">#01D2FB</color>
     <color name="white">#FFFFFF</color>
     <color name="background">#fafafa</color>
+    <color name="gray">#e2e2e2</color>
+    <color name="colorNavNormal">#707070</color>
 </resources>

@@ -31,10 +31,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private static final int ITEM_TYPE_FOOTER = 0x000011;
     private static final int ITEM_TYPE_NORMAL= 0x000012;
     // 当前加载状态，默认为加载完成
-    private int loadState = 2;
-    public final int LOADING = 1;
-    public final int LOADING_COMPLETE = 2;
-    public final int LOADING_END = 3;
+//    private int loadState = 2;
+//    public final int LOADING = 1;
+//    public final int LOADING_COMPLETE = 2;
+//    public final int LOADING_END = 3;
 
     private Context context;
     private List<ArticleBean> dataList = new ArrayList<>();
@@ -68,10 +68,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 itemView = LayoutInflater.from(context).inflate(R.layout.recycler_home_head, viewGroup, false);
                 viewHolder = new HeaderHolder(itemView);
                 break;
-            case ITEM_TYPE_FOOTER:
-                itemView = LayoutInflater.from(context).inflate(R.layout.recycler_refresh_footer, viewGroup, false);
-                viewHolder = new FooterHolder(itemView);
-                break;
+//            case ITEM_TYPE_FOOTER:
+//                itemView = LayoutInflater.from(context).inflate(R.layout.recycler_refresh_footer, viewGroup, false);
+//                viewHolder = new FooterHolder(itemView);
+//                break;
             default:
                 itemView = LayoutInflater.from(context).inflate(R.layout.recycler_common_list, viewGroup, false);
                 viewHolder = new NormalHolder(itemView);
@@ -86,23 +86,25 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (viewHolder instanceof HeaderHolder){
             HeaderHolder holder = (HeaderHolder) viewHolder;
             holder.setBanner(titles,images);
-        }else if (viewHolder instanceof FooterHolder){
-            FooterHolder holder = (FooterHolder) viewHolder;
-            switch (loadState){
-                case LOADING:
-                    holder.tvLoading.setVisibility(View.VISIBLE);
-                    holder.tvLoadEnd.setVisibility(View.GONE);
-                    break;
-                case LOADING_COMPLETE:
-                    holder.tvLoading.setVisibility(View.GONE);
-                    holder.tvLoadEnd.setVisibility(View.GONE);
-                    break;
-                case LOADING_END:
-                    holder.tvLoading.setVisibility(View.GONE);
-                    holder.tvLoadEnd.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }else {
+        }
+//        else if (viewHolder instanceof FooterHolder){
+//            FooterHolder holder = (FooterHolder) viewHolder;
+//            switch (loadState){
+//                case LOADING:
+//                    holder.tvLoading.setVisibility(View.VISIBLE);
+//                    holder.tvLoadEnd.setVisibility(View.GONE);
+//                    break;
+//                case LOADING_COMPLETE:
+//                    holder.tvLoading.setVisibility(View.GONE);
+//                    holder.tvLoadEnd.setVisibility(View.GONE);
+//                    break;
+//                case LOADING_END:
+//                    holder.tvLoading.setVisibility(View.GONE);
+//                    holder.tvLoadEnd.setVisibility(View.VISIBLE);
+//                    break;
+//            }
+//        }
+        else {
             NormalHolder holder = (NormalHolder) viewHolder;
             ArticleBean bean = dataList.get(position-1);
             holder.setItem(bean);
@@ -114,7 +116,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public int getItemCount() {
-        return dataList.size()+2;
+        return dataList.size()+1;
     }
 
     class NormalHolder extends RecyclerView.ViewHolder{
@@ -195,7 +197,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
     }
 
-    private class FooterHolder extends RecyclerView.ViewHolder{
+    /*private class FooterHolder extends RecyclerView.ViewHolder{
         TextView tvLoading;
         TextView tvLoadEnd;
         FooterHolder(View view){
@@ -203,7 +205,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             tvLoading = view.findViewById(R.id.tv_loading);
             tvLoadEnd = view.findViewById(R.id.tv_load_end);
         }
-    }
+    }*/
 
     public void setNewData(List<ArticleBean> newDatas) {
         if (newDatas != null) {
@@ -234,10 +236,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
     }
 
+/*
     public void setLoadState(int loadState){
         this.loadState = loadState;
         notifyDataSetChanged();
     }
+*/
 
     public void setCollectState(int position,boolean state){
         dataList.get(position).setCollect(state);

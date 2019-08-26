@@ -63,8 +63,8 @@ public class ProjectPresenter<PV extends IProjectView> extends BasePresenter<PV>
 
                     @Override
                     public void onNext(BaseResponse<ArticlesBean> articlesBeanBaseResponse) {
-                        LogUtil.i(TAG,"getSecondArticle onNext "+ articlesBeanBaseResponse.toString());
-                        mViewRef.get().showAriticle(articlesBeanBaseResponse.getData().getDatas());
+                        LogUtil.i(TAG,"loadArticle onNext "+ articlesBeanBaseResponse.toString());
+                        mViewRef.get().showArticle(articlesBeanBaseResponse.getData().getDatas());
                     }
 
                     @Override
@@ -75,6 +75,35 @@ public class ProjectPresenter<PV extends IProjectView> extends BasePresenter<PV>
                     @Override
                     public void onComplete() {
 
+                    }
+                });
+    }
+
+    @Override
+    public void loadMoreArticle(int pageNum, int id) {
+        projectModel.getProjectArticles(pageNum,id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResponse<ArticlesBean>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        LogUtil.i(TAG,"onSubscribe ");
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<ArticlesBean> articlesBeanBaseResponse) {
+                        LogUtil.i(TAG,"loadMoreArticle onNext "+ articlesBeanBaseResponse.toString());
+                        mViewRef.get().showMoreArticle(articlesBeanBaseResponse.getData().getDatas());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.i(TAG,"getSecondArticle onError "+ e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtil.i(TAG,"onComplete ");
                     }
                 });
     }

@@ -36,8 +36,10 @@ public class NetworkServer {
         }
         return mInstance;
     }
-
-    public NetworkApi getNetworkDatas(){
+    /*
+    * synchronized 保持同步 切换太快数据不加载
+    * */
+    public synchronized NetworkApi getNetworkDatas(){
         if (mService == null){
             Cache cache = new Cache(new File(mContext.getCacheDir(), "HttpCache"), 1024*1024*10);
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder().cache(cache)

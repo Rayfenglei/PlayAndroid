@@ -62,6 +62,7 @@ public class HomePresenter<PV extends IHomeView> extends BasePresenter<PV> imple
                     }
                     @Override
                     public void onNext(BaseResponse<ArticlesBean> articlesBeanBaseResponse) {
+                        LogUtil.i(TAG,"loadArticles onNext"+ articlesBeanBaseResponse.toString());
                         mViewRef.get().showArticles(articlesBeanBaseResponse.getData().getDatas());
                     }
                     @Override

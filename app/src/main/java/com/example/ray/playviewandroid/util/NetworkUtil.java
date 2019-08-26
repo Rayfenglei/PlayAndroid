@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 public class NetworkUtil {
     public static final int NETTYPE_WIFI = 0x01;

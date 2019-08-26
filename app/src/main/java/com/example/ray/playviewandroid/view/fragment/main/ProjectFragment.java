@@ -94,7 +94,12 @@ public class ProjectFragment extends BaseFragment<IProjectView, ProjectPresenter
     }
 
     @Override
-    public void showAriticle(List<ArticleBean> articlesList) {
+    public void showArticle(List<ArticleBean> articlesList) {
+
+    }
+
+    @Override
+    public void showMoreArticle(List<ArticleBean> articlesList) {
 
     }
 

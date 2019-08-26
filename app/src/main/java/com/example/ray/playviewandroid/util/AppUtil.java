@@ -1,6 +1,9 @@
 package com.example.ray.playviewandroid.util;
 
 import android.content.Context;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class AppUtil {
     /**
@@ -17,5 +20,12 @@ public class AppUtil {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    public static boolean isEmptyList(List<?> list) {
+        return list == null || list.size() == 0;
+    }
+    public static void toastShow(Context context,String msg){
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
     }
 }

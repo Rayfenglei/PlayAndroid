@@ -55,6 +55,11 @@ public class PublicPresenter<PV extends IPublicView> extends BasePresenter<PV> i
     }
 
     @Override
+    public void loadMorePublicArticle(int pageNum, int id) {
+
+    }
+
+    @Override
     public void collectArticles(int id) {
 
     }

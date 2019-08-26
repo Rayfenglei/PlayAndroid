@@ -19,12 +19,19 @@ import com.example.ray.playviewandroid.base.BaseFragment;
 import com.example.ray.playviewandroid.bean.ArticleBean;
 import com.example.ray.playviewandroid.constants.PlayViewConstants;
 import com.example.ray.playviewandroid.presenter.login.PublicDetailPresenter;
+import com.example.ray.playviewandroid.util.AppUtil;
+import com.example.ray.playviewandroid.util.LogUtil;
+import com.example.ray.playviewandroid.util.NetworkUtil;
 import com.example.ray.playviewandroid.util.SharedPreferencesUtils;
 import com.example.ray.playviewandroid.view.activity.ArticleActivity;
 import com.example.ray.playviewandroid.view.activity.LoginActivity;
 import com.example.ray.playviewandroid.view.adapter.CommonAdapter;
 import com.example.ray.playviewandroid.view.adapter.RecyclerOnScrollListener;
 import com.example.ray.playviewandroid.view.interfaces.IPublicDetailView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +45,10 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     private CommonAdapter mAdapter;
     private List<ArticleBean> articleBeanList = new ArrayList<>();
     private int clickPosition;
-    private static int LOAD_PAGE = 0;
+
+    private SmartRefreshLayout mRefreshLayout;
+    private int mPageNum = 0;  //用于刷新
+    private boolean isRefresh = false;  //是否为向上刷新
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,13 +63,13 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     @Override
     public void initView() {
         mRecyclerView = view.findViewById(R.id.rv_public_detail);
-
+        mRefreshLayout = view.findViewById(R.id.srl_public_detail);
     }
 
     @Override
     public void initData() {
         getData();
-        mPresenter.loadPublicArticle(LOAD_PAGE,mCid);
+        mPresenter.loadPublicArticle(0,mCid);
         mAdapter = new CommonAdapter(context,R.layout.recycler_common_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -72,14 +82,15 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     @Override
     public void initEvent() {
         mAdapter.setOnItemClickListener(onItemClickListener);
-        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
-            @Override
-            public void onLoadMore() {
-                mAdapter.setLoadState(mAdapter.LOADING);
-                LOAD_PAGE++;
-                mPresenter.loadPublicArticle(LOAD_PAGE,mCid);
-            }
-        });
+        initRefreshView();
+//        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
+//            @Override
+//            public void onLoadMore() {
+//                mAdapter.setLoadState(mAdapter.LOADING);
+//                LOAD_PAGE++;
+//                mPresenter.loadPublicArticle(LOAD_PAGE,mCid);
+//            }
+//        });
     }
 
     @Override
@@ -88,12 +99,29 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     }
 
     @Override
-    public void showAriticle(List<ArticleBean> articlesList) {
+    public void showArticle(List<ArticleBean> articlesList) {
         articleBeanList.addAll(articlesList);
         mAdapter.setDataList(articlesList);
-        mAdapter.setLoadState(mAdapter.LOADING_COMPLETE);
+//        mAdapter.setLoadState(mAdapter.LOADING_COMPLETE);
     }
 
+    @Override
+    public void showMoreArticle(List<ArticleBean> articlesList) {
+        if (isRefresh) {
+            if (!AppUtil.isEmptyList(articleBeanList)) {
+                articleBeanList.clear();
+            }
+            mRefreshLayout.finishRefresh();
+        } else {
+            if (AppUtil.isEmptyList(articleBeanList)) {
+                mRefreshLayout.finishLoadmoreWithNoMoreData();
+            } else {
+                mRefreshLayout.finishLoadmore(1000);
+            }
+        }
+        articleBeanList.addAll(articlesList);
+        mAdapter.onAddData(articlesList);
+    }
 
     @Override
     public void showCollectSuccess() {
@@ -173,5 +201,28 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
         PublicDetailFragment fragment = new PublicDetailFragment();
         fragment.setArguments(bundle);
         return fragment;
+    }
+    private void initRefreshView() {
+        mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                LogUtil.i(TAG," onLoadmore ");
+                mPageNum++;
+                isRefresh = false;
+                mPresenter.loadMorePublicArticle(mPageNum,mCid);
+            }
+        });
+
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                if (NetworkUtil.isNetworkConnected(context)) {
+                    LogUtil.i(TAG," onRefresh ");
+                    mPageNum = 0;
+                    isRefresh = true;
+                    mPresenter.loadMorePublicArticle(0, mCid);
+                }
+            }
+        });
     }
 }

@@ -135,6 +135,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public void onAddData(List<ArticleBean> newDatas) {
+        if (newDatas != null) {
+            dataList.addAll(newDatas);
+            notifyDataSetChanged();
+        }
+    }
     public void setCollectState(int position,boolean state){
         dataList.get(position).setCollect(state);
         notifyItemChanged(position);

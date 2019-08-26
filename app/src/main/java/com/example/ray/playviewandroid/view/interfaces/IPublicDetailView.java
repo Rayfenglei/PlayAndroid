@@ -5,5 +5,6 @@ import com.example.ray.playviewandroid.bean.ArticleBean;
 import java.util.List;
 
 public interface IPublicDetailView extends ICollectionView {
-    void showAriticle(List<ArticleBean> articlesList);
+    void showArticle(List<ArticleBean> articlesList);
+    void showMoreArticle(List<ArticleBean> articlesList);
 }
