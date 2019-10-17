@@ -24,6 +24,7 @@ import com.example.ray.playviewandroid.view.adapter.CommonAdapter;
 import com.example.ray.playviewandroid.view.adapter.RecyclerOnScrollListener;
 import com.example.ray.playviewandroid.view.interfaces.ISearchView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +127,8 @@ public class SearchArticleActivity extends BaseActivity<ISearchView, SearchPrese
     }
 
     public static void startActivityForActivity(Activity activity, String key, int requestCode){
-        Intent intent = new Intent(activity,SearchArticleActivity.class);
+        WeakReference<Activity> rfActivity = new WeakReference<>(activity);
+        Intent intent = new Intent(rfActivity.get(),SearchArticleActivity.class);
         intent.putExtra("key",key);
         activity.startActivityForResult(intent,requestCode);
     }

@@ -209,7 +209,7 @@ public class SystemDetailFragment extends BaseFragment<ISystemDetailView, System
                 LogUtil.i(TAG," onLoadmore ");
                 mPageNum++;
                 isRefresh = false;
-                mPresenter.getSecondArticle(mPageNum,mCid);
+                mPresenter.getMoreSecondArticle(mPageNum,mCid);
             }
         });
 
@@ -220,7 +220,7 @@ public class SystemDetailFragment extends BaseFragment<ISystemDetailView, System
                     LogUtil.i(TAG," onRefresh ");
                     mPageNum = 0;
                     isRefresh = true;
-                    mPresenter.getSecondArticle(0, mCid);
+                    mPresenter.getMoreSecondArticle(0, mCid);
                 }
             }
         });

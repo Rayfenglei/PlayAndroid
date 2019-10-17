@@ -24,6 +24,8 @@ import com.just.agentweb.AgentWeb;
 import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
 
+import java.lang.ref.WeakReference;
+
 
 public class ArticleActivity extends BaseActivity<IArticleView, ArticlePresenter<IArticleView>> implements IArticleView{
     private static final String TAG = "ArticleActivity";
@@ -179,7 +181,8 @@ public class ArticleActivity extends BaseActivity<IArticleView, ArticlePresenter
     * @param fragment
     * */
     public static void startActivityForFragment(Activity activity,Fragment fragment, String url, String title, int id, boolean isCollect, int requestCode){
-        Intent intent = new Intent(activity,ArticleActivity.class);
+        WeakReference<Activity> rfActivity = new WeakReference<>(activity);
+        Intent intent = new Intent(rfActivity.get(),ArticleActivity.class);
         intent.putExtra("url",url);
         intent.putExtra("title",title);
         intent.putExtra("id",id);
@@ -194,7 +197,8 @@ public class ArticleActivity extends BaseActivity<IArticleView, ArticlePresenter
      * @param fragment
      * */
     public static void startActivityForActivity(Activity activity, String url, String title, int id, boolean isCollect, int requestCode){
-        Intent intent = new Intent(activity,ArticleActivity.class);
+        WeakReference<Activity> rfActivity = new WeakReference<>(activity);
+        Intent intent = new Intent(rfActivity.get(),ArticleActivity.class);
         intent.putExtra("url",url);
         intent.putExtra("title",title);
         intent.putExtra("id",id);

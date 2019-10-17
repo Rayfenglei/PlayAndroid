@@ -1,5 +1,6 @@
 package com.example.ray.playviewandroid.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.ray.playviewandroid.bean.FirstSystemBean;
 import com.example.ray.playviewandroid.view.adapter.DetailViewpagerAdapter;
 import com.example.ray.playviewandroid.view.fragment.main.SystemDetailFragment;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +94,8 @@ public class SystemDetailActivity extends BaseActivity {
      * @param firstSystemBean      一级知识
      */
     public static void startActivityForFragment(Context context, FirstSystemBean firstSystemBean){
-        Intent intent = new Intent(context,SystemDetailActivity.class);
+        WeakReference<Context> rfContext = new WeakReference<>(context);
+        Intent intent = new Intent(rfContext.get(),SystemDetailActivity.class);
         intent.putExtra("firstSystemBean",firstSystemBean);
         context.startActivity(intent);
     }

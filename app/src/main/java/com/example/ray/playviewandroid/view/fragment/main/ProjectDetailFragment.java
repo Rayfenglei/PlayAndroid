@@ -2,6 +2,8 @@ package com.example.ray.playviewandroid.view.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,7 +49,7 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
     private List<ArticleBean> articleBeanList = new ArrayList<>();
     private int clickPosition;
     private SmartRefreshLayout mRefreshLayout;
-    private int mPageNum = 0;  //用于刷新
+    private int mPageNum = 1;  //用于刷新
     private boolean isRefresh = false;  //是否为向上刷新
     @Nullable
     @Override
@@ -74,7 +76,7 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
     @Override
     public void initData() {
         getData();
-        mPresenter.loadArticle(0,id);
+        mPresenter.loadArticle(1,id);
         mAdapter = new CommonAdapter(context,R.layout.recyeler_item_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -224,9 +226,9 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
             public void onRefresh(RefreshLayout refreshlayout) {
                 if (NetworkUtil.isNetworkConnected(context)) {
                     LogUtil.i(TAG," onRefresh ");
-                    mPageNum = 0;
+                    mPageNum = 1;
                     isRefresh = true;
-                    mPresenter.loadMoreArticle(0, id);
+                    mPresenter.loadMoreArticle(1, id);
                 }
             }
         });

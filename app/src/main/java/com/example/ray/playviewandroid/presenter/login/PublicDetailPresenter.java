@@ -9,6 +9,8 @@ import com.example.ray.playviewandroid.presenter.interfaces.IPublicPresenter;
 import com.example.ray.playviewandroid.util.LogUtil;
 import com.example.ray.playviewandroid.view.interfaces.IPublicDetailView;
 
+import java.util.concurrent.Callable;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -20,7 +22,12 @@ public class PublicDetailPresenter<PV extends IPublicDetailView> extends BasePre
 
     @Override
     public void loadPublicTab() {
-
+        Callable callable = new Callable() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        };
     }
 
     @Override

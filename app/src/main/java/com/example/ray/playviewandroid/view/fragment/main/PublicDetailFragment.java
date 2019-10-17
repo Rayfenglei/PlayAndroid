@@ -47,7 +47,7 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     private int clickPosition;
 
     private SmartRefreshLayout mRefreshLayout;
-    private int mPageNum = 0;  //用于刷新
+    private int mPageNum = 1;  //用于刷新
     private boolean isRefresh = false;  //是否为向上刷新
     @Nullable
     @Override
@@ -69,7 +69,7 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     @Override
     public void initData() {
         getData();
-        mPresenter.loadPublicArticle(0,mCid);
+        mPresenter.loadPublicArticle(1,mCid);
         mAdapter = new CommonAdapter(context,R.layout.recycler_common_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -218,9 +218,9 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
             public void onRefresh(RefreshLayout refreshlayout) {
                 if (NetworkUtil.isNetworkConnected(context)) {
                     LogUtil.i(TAG," onRefresh ");
-                    mPageNum = 0;
+                    mPageNum = 1;
                     isRefresh = true;
-                    mPresenter.loadMorePublicArticle(0, mCid);
+                    mPresenter.loadMorePublicArticle(1, mCid);
                 }
             }
         });

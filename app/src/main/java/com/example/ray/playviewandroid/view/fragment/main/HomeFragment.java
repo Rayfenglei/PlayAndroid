@@ -59,7 +59,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
     private EditText etSearchBar;
     private ImageView imSearchBar;
     private SmartRefreshLayout mRefreshLayout;
-    private int mPageNum = 0;//首页文章页数
+    private int mPageNum = 1;//首页文章页数
     private boolean isRefresh = false; //是否在上拉刷新
     @Nullable
     @Override
@@ -281,7 +281,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
                     refreshlayout.finishRefresh();
                     AppUtil.toastShow(context,"网络不可用");
                 } else {
-                    mPageNum = 0;
+                    mPageNum = 1;
                     isRefresh = true;
                     mPresenter.loadMoreArticles(mPageNum);
                 }

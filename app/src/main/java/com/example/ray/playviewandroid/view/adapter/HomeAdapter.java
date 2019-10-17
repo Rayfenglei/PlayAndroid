@@ -279,4 +279,8 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
         }
     }
+
+    private void setBannerPlay(){
+
+    }
 }
