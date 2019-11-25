@@ -43,6 +43,12 @@ public abstract class BaseFragment<PV, PT extends BasePresenter<PV>> extends Fra
     @Nullable
     protected ViewGroup container = null;
 
+    private boolean isInitData = false; //标志位,判断数据是否初始化
+    private boolean isFragmentVisible = false; //标志位,判断fragment是否可见
+    private boolean isViewCreated = false; //标志位,判断view已经加载完成 避免空指针操作
+    private boolean isFirstVisible = true;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,97 @@ public abstract class BaseFragment<PV, PT extends BasePresenter<PV>> extends Fra
         }
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated =true;//此时view已经加载完成，设置其为true
+        initView();
+        initEvent();
+        if (isFragmentVisible && isFirstVisible) {
+            Log.e(TAG, "Adapter 默认展示的那个 Fragment ，或者隔 tab 选中的时候  requestData 推迟到 onCreateView 后 ");
+            initData();
+
+            isFirstVisible = false;
+        }
+
+    }
+
+    /**
+     * 懒加载方法
+     */
+    public void lazyInitData(){
+        Log.i(TAG,"isInitData : "+isInitData+" isViewCreated :"+ isViewCreated +" isFragmentVisible : "+ isFragmentVisible);
+        if(setFragmentTarget()){
+            if(!isInitData && isFragmentVisible && isViewCreated){//如果数据还没有被加载过，并且fragment已经可见，view已经加载完成
+                initData();//加载数据
+                isInitData=true;//是否已经加载数据标志重新赋值为true
+            }
+        }else {
+            if(!isInitData && isFragmentVisible && isViewCreated){//如果数据还没有被加载过，并且fragment已经可见，view已经加载完成
+
+                initData();//加载数据
+                isInitData=true;//是否已经加载数据标志重新赋值为true
+            }else if (!isInitData && getParentFragment()==null && isViewCreated){
+
+                initData();
+                isInitData=true;
+            }
+        }
+
+    }
+
+    /**
+     * 设置Fragment target，
+     * 嵌套 true  ，单层 false
+     *
+     */
+    protected abstract boolean setFragmentTarget();
+    /**
+     * 可见状态改变时调用
+     * @param isVisibleToUser
+     * */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //走这里分发可见状态情况有两种，1. 已缓存的 Fragment 被展示的时候 2. 当前 Fragment 由可见变成不可见的状态时
+        // 对于默认 tab 和 间隔 checked tab 需要等到 isViewCreated = true 后才可以通过此通知用户可见，
+        // 这种情况下第一次可见不是在这里通知 因为 isViewCreated = false 成立，可见状态在 onActivityCreated 中分发
+        // 对于非默认 tab，View 创建完成  isViewCreated =  true 成立，走这里分发可见状态，mIsFirstVisible 此时还为 false  所以第一次可见状态也将通过这里分发
+        this.isFragmentVisible =isVisibleToUser;//将fragment是否可见值赋给标志isVisibleToUser
+        lazyInitData();//懒加载
+    }
+
+    /**
+     * fragment生命周期中onViewCreated之后的方法 在这里调用一次懒加载 避免第一次可见不加载数据
+     * @param savedInstanceState
+     */
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        lazyInitData();//懒加载
+    }
+
+    /**
+     * Fragment显示隐藏监听
+     * @param hidden
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            lazyInitData();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        isViewCreated = false;
+        isInitData = false;
+        isFirstVisible = true;
+    }
+
     protected abstract PT createPresenter();
     /**
      * 设置界面布局

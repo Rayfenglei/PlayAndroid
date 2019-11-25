@@ -38,7 +38,21 @@
         <activity android:name=".view.activity.LoginActivity"/>
         <activity android:name=".view.activity.ArticleActivity"/>
         <activity android:name=".view.activity.SystemDetailActivity"/>
-        <activity android:name=".view.activity.SearchActivity"/>
+        <activity android:name=".view.activity.SearchActivity"
+            android:screenOrientation="portrait">
+            <!--Android 接收外部跳转过滤器-->
+            <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
+            <intent-filter>
+                <data android:scheme="fl"
+                    android:host="ray.com"
+                    android:path="/from"
+                    android:port="8888"/>
+                <!--下面这几行也必须得设置-->
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.SearchArticleActivity"/>
     </application>
 

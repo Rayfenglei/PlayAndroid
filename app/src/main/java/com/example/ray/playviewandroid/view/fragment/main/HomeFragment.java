@@ -2,6 +2,7 @@ package com.example.ray.playviewandroid.view.fragment.main;
 
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 
-public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeView>> implements IHomeView,View.OnClickListener {
+public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeView>> implements IHomeView, View.OnClickListener {
 
     private static final String TAG = "HomeFragment";
     private static int LOAD_PAGE;
@@ -61,16 +63,82 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
     private SmartRefreshLayout mRefreshLayout;
     private int mPageNum = 1;//首页文章页数
     private boolean isRefresh = false; //是否在上拉刷新
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.i(TAG, "onAttach");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_home);
         LOAD_PAGE = 0;
-        initView();
-        initData();
-        initEvent();
+        Log.i(TAG, "onCreateView");
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "onActivityCreated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initEvent();
+        Log.i(TAG, "onResume");
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(TAG, "onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i(TAG, "onDetach");
+    }
+
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
     }
 
     @Override
@@ -87,7 +155,8 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
         articleBeanList = new ArrayList<>();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mHomeAdapter = new HomeAdapter(context,getActivity());
+        mHomeAdapter = new HomeAdapter(context, getActivity());
+        mHomeAdapter.setOnItemClickListener1(onItemClickListener);
         mRecyclerView.setAdapter(mHomeAdapter);
         mPresenter.loadArticles(LOAD_PAGE);
         mPresenter.loadBanner();
@@ -97,12 +166,12 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
     public void initEvent() {
         btfloat.setOnClickListener(this);
         etSearchBar.setOnClickListener(this);
-        mHomeAdapter.setOnItemClickListener1(onItemClickListener);
+
         /*
          * 防止数据没有加载 banner下边出现 分割线
          * */
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(context,DividerItemDecoration.VERTICAL);
-        itemDecoration.setDrawable(ContextCompat.getDrawable(context,R.drawable.recycler_divider));
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        itemDecoration.setDrawable(ContextCompat.getDrawable(context, R.drawable.recycler_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
         initRefreshView();
 //        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
@@ -121,10 +190,9 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
     }
 
 
-
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_home_float:
                 backTop();
                 break;
@@ -137,16 +205,14 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
     @Override
     public void showBannerData(List<BannerDataBean> bannerDataList) {
         mHomeAdapter.setBannerData(bannerDataList);
-        LogUtil.i(TAG," showBannerData size "+bannerDataList.size());
+        LogUtil.i(TAG, " showBannerData size " + bannerDataList.size());
     }
 
     @Override
     public void showArticles(List<ArticleBean> articleList) {
-
-
         articleBeanList.addAll(articleList);
         mHomeAdapter.setNewData(articleList);
-        LogUtil.i(TAG," showArticles size "+articleList.size());
+        LogUtil.i(TAG, " showArticles size " + articleList.size());
     }
 
     @Override
@@ -166,17 +232,17 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
         articleBeanList.addAll(articleList);
         mHomeAdapter.onAddData(articleList);
 //        mHomeAdapter.setLoadState(mHomeAdapter.LOADING_COMPLETE);
-        LogUtil.i(TAG," showMoreArticles size "+articleList.size());
+        LogUtil.i(TAG, " showMoreArticles size " + articleList.size());
     }
 
     @Override
     public void showCollectSuccess() {
-        mHomeAdapter.setCollectState(clickPosition,true);
+        mHomeAdapter.setCollectState(clickPosition, true);
     }
 
     @Override
     public void showUnCollectSuccess() {
-        mHomeAdapter.setCollectState(clickPosition,false);
+        mHomeAdapter.setCollectState(clickPosition, false);
     }
 
     @Override
@@ -186,9 +252,9 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
 
     @Override
     public void collect(int position) {
-        if (!articleBeanList.get(position).isCollect()){
+        if (!articleBeanList.get(position).isCollect()) {
             mPresenter.collectArticles(articleBeanList.get(position).getId());
-        }else {
+        } else {
             mPresenter.unCollectArticles(articleBeanList.get(position).getId());
         }
     }
@@ -206,12 +272,12 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
         @Override
         public void onItemClick(View v, HomeAdapter.ViewName viewName, int position) {
             clickPosition = position;
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.iv_common_rv_like:
-                    if (SharedPreferencesUtils.getBoolean(context,PlayViewConstants.LOGIN_STATE,false)){
+                    if (SharedPreferencesUtils.getBoolean(context, PlayViewConstants.LOGIN_STATE, false)) {
                         collect(position);
-                    }else {
-                        startActivity(new Intent(context,LoginActivity.class));
+                    } else {
+                        startActivity(new Intent(context, LoginActivity.class));
                         context.finish();
                     }
                     break;
@@ -236,34 +302,35 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        LogUtil.i(TAG," "+data.getBooleanExtra(PlayViewConstants.ARTICLE_COLLECT, false));
-        if (resultCode != RESULT_OK){
+        LogUtil.i(TAG, " " + data.getBooleanExtra(PlayViewConstants.ARTICLE_COLLECT, false));
+        if (resultCode != RESULT_OK) {
             return;
         }
 
         ArticleBean article = articleBeanList.get(clickPosition);
-        switch (requestCode){
+        switch (requestCode) {
             case PlayViewConstants.REQUEST_ARTICLE_ACTIVITY:
                 boolean isCollect = data.getBooleanExtra(PlayViewConstants.ARTICLE_COLLECT, false);
-                if (isCollect != article.isCollect()){
+                if (isCollect != article.isCollect()) {
                     article.setCollect(isCollect);
-                    mHomeAdapter.notifyItemChanged(clickPosition+1);
+                    mHomeAdapter.notifyItemChanged(clickPosition + 1);
                 }
                 break;
         }
     }
 
-    private void toSearchActivity(){
+    private void toSearchActivity() {
         Intent intent = new Intent(getActivity(), SearchActivity.class);
-        Pair<View,String> etPair = new Pair<>((View)etSearchBar,getString(R.string.trans_edit));
-        Pair<View,String> imPair = new Pair<>((View)imSearchBar,getString(R.string.trans_image));
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(),imPair,etPair);
-        startActivity(intent,options.toBundle());
+        Pair<View, String> etPair = new Pair<>((View) etSearchBar, getString(R.string.trans_edit));
+        Pair<View, String> imPair = new Pair<>((View) imSearchBar, getString(R.string.trans_image));
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imPair, etPair);
+        startActivity(intent, options.toBundle());
     }
+
     /*
-    * 下拉刷新 setOnRefreshListener
-    * 下拉加载 setOnLoadmoreListener
-    * */
+     * 下拉刷新 setOnRefreshListener
+     * 下拉加载 setOnLoadmoreListener
+     * */
     private void initRefreshView() {
         mRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
@@ -279,7 +346,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
             public void onRefresh(RefreshLayout refreshlayout) {
                 if (!NetworkUtil.isNetworkConnected(context)) {
                     refreshlayout.finishRefresh();
-                    AppUtil.toastShow(context,"网络不可用");
+                    AppUtil.toastShow(context, "网络不可用");
                 } else {
                     mPageNum = 1;
                     isRefresh = true;

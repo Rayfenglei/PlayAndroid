@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,11 +54,10 @@ public class SystemDetailFragment extends BaseFragment<ISystemDetailView, System
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_system_detail);
-        initView();
-        initData();
-        initEvent();
+
         return view;
     }
+
 
     @Override
     public void initView() {
@@ -70,6 +70,7 @@ public class SystemDetailFragment extends BaseFragment<ISystemDetailView, System
         getData();
         mPresenter.getSecondArticle(0,mCid);
         mAdapter = new CommonAdapter(context,R.layout.recycler_common_list);
+        mAdapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
@@ -77,10 +78,13 @@ public class SystemDetailFragment extends BaseFragment<ISystemDetailView, System
         itemDecoration.setDrawable(ContextCompat.getDrawable(context,R.drawable.recycler_divider));
         mRecyclerView.addItemDecoration(itemDecoration);
     }
-
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
+    }
     @Override
     public void initEvent() {
-        mAdapter.setOnItemClickListener(onItemClickListener);
+
         initRefreshView();
 //        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
 //            @Override

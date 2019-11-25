@@ -13,12 +13,14 @@ import java.util.HashSet;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
-public class AddCookiesInterceptor implements Interceptor {
+/*
+* 读取cookie
+* */
+public class ReadCookiesInterceptor implements Interceptor {
 
     private Context mContext;
 
-    public AddCookiesInterceptor(Context context) {
+    public ReadCookiesInterceptor(Context context) {
         mContext = context;
     }
 

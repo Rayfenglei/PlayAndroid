@@ -34,7 +34,7 @@ public class SearchPresenter<PV extends ISearchView> extends BasePresenter<PV> i
     private static final String TAG = "SearchPresenter";
     private ISearchModel searchModel = new SearchModel();
     private String key = "http://www.wanandroid.com//hotkey/json";
-    private ICache mMemoryCache = new MemoryCache(), mDiskCache = new DiskCache();
+    private ICache mDiskCache = new DiskCache();
 
     @Override
     public void getHotKey() {
@@ -62,7 +62,7 @@ public class SearchPresenter<PV extends ISearchView> extends BasePresenter<PV> i
                     }
                 });
 
-        final Disposable subscribe = Observable.concat(mMemoryCache.<BaseResponse<List<HotKeyBean>>>get(TAG)
+        final Disposable subscribe = Observable.concat(MemoryCache.getInstance().<BaseResponse<List<HotKeyBean>>>get(TAG)
                 ,mDiskCache.<BaseResponse<List<HotKeyBean>>>get(TAG)
                 ,network)
                 .subscribeOn(Schedulers.io())
@@ -73,7 +73,7 @@ public class SearchPresenter<PV extends ISearchView> extends BasePresenter<PV> i
                         Log.e(TAG, "accept: 读取数据成功:" + listBaseResponse.toString());
                         mViewRef.get().showHotKey(listBaseResponse.getData());
                         mDiskCache.put(TAG,listBaseResponse);
-                        mMemoryCache.put(TAG,listBaseResponse);
+                        MemoryCache.getInstance().put(TAG,listBaseResponse);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

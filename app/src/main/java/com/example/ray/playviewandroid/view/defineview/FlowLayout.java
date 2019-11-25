@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+* 流式布局
+* */
 public class FlowLayout extends ViewGroup {
     /**
      * 存储每一行的剩余的空间

@@ -54,12 +54,14 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_public_detail);
-        initView();
-        initData();
-        initEvent();
+
         return view;
     }
 
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
+    }
     @Override
     public void initView() {
         mRecyclerView = view.findViewById(R.id.rv_public_detail);
@@ -71,6 +73,7 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
         getData();
         mPresenter.loadPublicArticle(1,mCid);
         mAdapter = new CommonAdapter(context,R.layout.recycler_common_list);
+        mAdapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
@@ -81,7 +84,7 @@ public class PublicDetailFragment extends BaseFragment<IPublicDetailView, Public
 
     @Override
     public void initEvent() {
-        mAdapter.setOnItemClickListener(onItemClickListener);
+
         initRefreshView();
 //        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
 //            @Override

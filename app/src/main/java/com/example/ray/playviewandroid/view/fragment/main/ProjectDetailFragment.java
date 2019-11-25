@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,7 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_project_detail);
-        initView();
-        initData();
-        initEvent();
+
         return view;
     }
 
@@ -78,6 +77,7 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
         getData();
         mPresenter.loadArticle(1,id);
         mAdapter = new CommonAdapter(context,R.layout.recyeler_item_list);
+        mAdapter.setOnItemClickListener(onItemClickListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
@@ -88,7 +88,7 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
 
     @Override
     public void initEvent() {
-        mAdapter.setOnItemClickListener(onItemClickListener);
+
         initRefreshView();
 //        mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
 //            @Override
@@ -99,7 +99,10 @@ public class ProjectDetailFragment extends BaseFragment<IProjectView, ProjectPre
 //            }
 //        });
     }
-
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
+    }
     @Override
     public void showArticle(List<ArticleBean> articlesList) {
         articleBeanList.addAll(articlesList);

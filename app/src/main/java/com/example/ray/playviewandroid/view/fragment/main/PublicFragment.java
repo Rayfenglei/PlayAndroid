@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +42,7 @@ public class PublicFragment extends BaseFragment<IPublicView, PublicPresenter<IP
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_public);
-        initView();
-        initData();
-        initView();
+
         return view;
     }
 
@@ -51,7 +50,10 @@ public class PublicFragment extends BaseFragment<IPublicView, PublicPresenter<IP
     protected PublicPresenter<IPublicView> createPresenter() {
         return new PublicPresenter<>();
     }
-
+    @Override
+    protected boolean setFragmentTarget() {
+        return true;
+    }
     @Override
     public void initView() {
         mTabLayout = view.findViewById(R.id.tab_public);
@@ -62,6 +64,7 @@ public class PublicFragment extends BaseFragment<IPublicView, PublicPresenter<IP
 
     @Override
     public void initData() {
+        Log.i(TAG,"initdata");
         mPresenter.loadPublicTab();
         mViewAdapter = new DetailViewpagerAdapter(context.getSupportFragmentManager(),mFragmentList,mTabTitles);
         mViewPager.setAdapter(mViewAdapter);

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import com.example.ray.playviewandroid.PlayApplication;
 import com.example.ray.playviewandroid.util.SharedPreferencesUtils;
 import java.io.IOException;
 import java.util.HashSet;
@@ -12,11 +14,13 @@ import java.util.Set;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
+/**
+ * 保存cookie
+ * */
 public class SaveCookiesInterceptor implements Interceptor {
     private Context mContext;
     public SaveCookiesInterceptor(Context context){
-        mContext=context;
+        mContext=context.getApplicationContext();
     }
 
     @NonNull
@@ -38,10 +42,8 @@ public class SaveCookiesInterceptor implements Interceptor {
 
     /**
      * 清除本地Cookie
-     *
-     * @param context Context
      */
-    public static void clearCookie(Context context) {
-        SharedPreferencesUtils.clear(context);
+    public void clearCookie() {
+        SharedPreferencesUtils.clear(mContext);
     }
 }

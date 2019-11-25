@@ -25,9 +25,6 @@ public class RegisterFragment extends BaseFragment<ILoginRegisterView, LoginRegi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_register);
-        initView();
-        initData();
-        initEvent();
         return view;
     }
 
@@ -77,5 +74,9 @@ public class RegisterFragment extends BaseFragment<ILoginRegisterView, LoginRegi
     @Override
     public void onFailed(String error) {
         showToast(error);
+    }
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
     }
 }

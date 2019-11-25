@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -23,21 +24,18 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DiskCache implements ICache {
     private static final String TAG = "CacheData";
-    private String CACHE_PATH = PlayApplication.getContext().getPackageResourcePath()+"playView/";
 
     @Override
     public <T extends BaseResponse> Observable<T> get(final String key) {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-
-                String filename = CACHE_PATH + key;
-                String result = readTextFromSDcard(filename);
+                String result = readTextFromSDcard(key);
                 LogUtil.i(TAG, "load from disk: " + result);
                 if (TextUtils.isEmpty(result)) {
                     emitter.onComplete();
                 } else {
-                    T t = (T) new Gson().fromJson(result,BaseResponse.class);
+                    T t = (T) new Gson().fromJson(result, BaseResponse.class);
                     emitter.onNext(t);
                 }
 
@@ -51,42 +49,35 @@ public class DiskCache implements ICache {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 LogUtil.i(TAG, "save to disk: " + key);
-
-                String filename = CACHE_PATH + key;
                 String result = t.toString();
-                saveText2Sdcard(filename, result);
+                saveText2Sdcard(key, result);
                 emitter.onNext(t);
                 emitter.onComplete();
 
             }
         }).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe();
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     private void saveText2Sdcard(String fileName, String text) {
-
-        File file = new File(fileName);
-//        File parentFile = file.getParentFile();
-//        if (!parentFile.exists()) {
-//            parentFile.mkdirs();
-//        }
+        //创建文件
+        File file = new File(PlayApplication.getContext().getCacheDir(), fileName);
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            bw.write(text);
-            bw.flush();
-            bw.close();
+            FileOutputStream out = new FileOutputStream(file);
+            out.write(text.getBytes());
+            out.close();
+            LogUtil.i(TAG, "file  save success");
         } catch (IOException e) {
             e.printStackTrace();
             file.delete();
-            LogUtil.i(TAG,"file  save failed");
+            LogUtil.i(TAG, "file  save failed");
         }
-        LogUtil.i(TAG,"file  save success");
     }
 
     private String readTextFromSDcard(String fileName) {
 
-        File file = new File(fileName);
+        File file = new File(PlayApplication.getContext().getCacheDir(), fileName);
         if (!file.exists()) {
             return null;
         }
@@ -96,9 +87,7 @@ public class DiskCache implements ICache {
             byte[] buffer = new byte[availableLength];
             fileInputStream.read(buffer);
             fileInputStream.close();
-
             return new String(buffer, "UTF-8");
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

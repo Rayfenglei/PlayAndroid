@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.Pair;
@@ -49,11 +51,10 @@ public class ProjectFragment extends BaseFragment<IProjectView, ProjectPresenter
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_project);
-        initView();
-        initData();
-        initEvent();
+
         return view;
     }
+
 
     @Override
     protected ProjectPresenter<IProjectView> createPresenter() {
@@ -80,7 +81,10 @@ public class ProjectFragment extends BaseFragment<IProjectView, ProjectPresenter
     public void initEvent() {
         etSearchBar.setOnClickListener(this);
     }
-
+    @Override
+    protected boolean setFragmentTarget() {
+        return true;
+    }
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.et_searcher_bar){

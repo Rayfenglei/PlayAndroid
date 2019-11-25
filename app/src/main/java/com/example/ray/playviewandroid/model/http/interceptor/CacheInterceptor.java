@@ -10,7 +10,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static com.example.ray.playviewandroid.PlayApplication.getContext;
-
+/*
+* 缓存拦截器
+* */
 public class CacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {

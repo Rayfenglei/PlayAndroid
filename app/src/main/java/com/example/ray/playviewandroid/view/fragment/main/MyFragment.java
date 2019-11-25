@@ -21,7 +21,7 @@ public class MyFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_my);
-        initView();
+
         return view;
     }
 
@@ -43,5 +43,9 @@ public class MyFragment extends BaseFragment {
     @Override
     public void initEvent() {
 
+    }
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
     }
 }

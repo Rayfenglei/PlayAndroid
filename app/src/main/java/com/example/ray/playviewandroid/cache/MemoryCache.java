@@ -21,8 +21,9 @@ import io.reactivex.functions.Consumer;
 public class MemoryCache implements ICache {
     private static final String TAG = "CacheData";
     private LruCache<String, String> mCache;
+    private static MemoryCache mInstance;
 
-    public MemoryCache() {
+    private MemoryCache() {
         //获取系统分配给每个应用程序的最大内存，每个应用系统分配32M
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         int mCacheSize = maxMemory / 8;
@@ -40,14 +41,24 @@ public class MemoryCache implements ICache {
         };
     }
 
+    public static MemoryCache getInstance(){
+        if (mInstance == null){
+            synchronized (MemoryCache.class){
+                if (mInstance == null){
+                    mInstance = new MemoryCache();
+                }
+            }
+        }
+        return mInstance;
+    }
+
     @Override
     public <T extends BaseResponse> Observable<T> get(final String key) {
         return  Observable.create(new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-
                 String result = mCache.get(key);
-                LogUtil.i(TAG, "load from memory: " + result);
+                LogUtil.i(TAG, "load from memory key : "+key+" data : "+ result);
                 if (TextUtils.isEmpty(result)) {
                     emitter.onComplete();
                 } else {
@@ -61,10 +72,8 @@ public class MemoryCache implements ICache {
 
     @Override
     public <T extends BaseResponse> void put(String key, T t) {
-
         if (null != t) {
-            Log.v(TAG, "save to memory: " + key);
-
+            Log.v(TAG, "save to memory: " + key+" t : "+t.toString());
             mCache.put(key, t.toString());
         }
     }

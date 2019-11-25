@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,13 +45,14 @@ public class SystemFragment extends BaseFragment<ISystemView, SystemPresenter<IS
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_system);
-        initView();
-        initData();
-        initEvent();
+
         return view;
     }
 
-
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
+    }
     @Override
     public void initView() {
 
@@ -65,6 +67,7 @@ public class SystemFragment extends BaseFragment<ISystemView, SystemPresenter<IS
 
         mDataList = new ArrayList<>();
         mAdapter = new SystemAdapter(context,mDataList,R.layout.recycler_system_list);
+        mAdapter.setOnItemClickListener(this);
         mRvSystem.setLayoutManager(new LinearLayoutManager(context));
         mRvSystem.setItemAnimator(new DefaultItemAnimator());
         mRvSystem.setAdapter(mAdapter);
@@ -75,7 +78,7 @@ public class SystemFragment extends BaseFragment<ISystemView, SystemPresenter<IS
 
     @Override
     public void initEvent() {
-        mAdapter.setOnItemClickListener(this);
+
         etSearchBar.setOnClickListener(this);
     }
 

@@ -34,11 +34,12 @@ public class LoginFragment extends BaseFragment<ILoginRegisterView, LoginRegiste
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         setContentView(R.layout.fragment_login);
-        initView();
-        initData();
-        initEvent();
-
         return view;
+    }
+
+    @Override
+    protected boolean setFragmentTarget() {
+        return false;
     }
 
     @Override
