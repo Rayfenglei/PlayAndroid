@@ -2,13 +2,14 @@ package com.example.ray.playviewandroid.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public abstract class BaseFragment<PV, PT extends BasePresenter<PV>> extends Fragment implements IViewConstraint {
     private static final String TAG = "BaseFragment";
@@ -75,8 +76,7 @@ public abstract class BaseFragment<PV, PT extends BasePresenter<PV>> extends Fra
         initEvent();
         if (isFragmentVisible && isFirstVisible) {
             Log.e(TAG, "Adapter 默认展示的那个 Fragment ，或者隔 tab 选中的时候  requestData 推迟到 onCreateView 后 ");
-            initData();
-
+            lazyInitData();
             isFirstVisible = false;
         }
 

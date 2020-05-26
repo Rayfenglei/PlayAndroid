@@ -27,8 +27,8 @@ public class DataKeeper {
 	public static final String ROOT_SHARE_PREFS_ = "DEMO_SHARE_PREFS_";
 
 	//文件缓存<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	/**TODO 必须将fileRootPath中的包名（这里是zblibrary.demo）改为你的应用包名*/
-	public static final String fileRootPath = getSDPath() != null ? (getSDPath() + "/zblibrary.demo/") : null;
+	/**TODO 必须将fileRootPath中的包名（这里是demo）改为你的应用包名*/
+	public static final String fileRootPath = getSDPath() != null ? (getSDPath() + "/demo/") : null;
 	public static final String accountPath = fileRootPath + "account/";
 	public static final String audioPath = fileRootPath + "audio/";
 	public static final String videoPath = fileRootPath + "video/";

@@ -54,13 +54,7 @@ public class SearchPresenter<PV extends ISearchView> extends BasePresenter<PV> i
 
             }
         });
-        Observable<BaseResponse<List<HotKeyBean>>> network = searchModel.getHotKey()
-                .doOnNext(new Consumer<BaseResponse<List<HotKeyBean>>>() {
-                    @Override
-                    public void accept(BaseResponse<List<HotKeyBean>> listBaseResponse) throws Exception {
-                        CacheManager.getInstance().setFoodListData(listBaseResponse);
-                    }
-                });
+        Observable<BaseResponse<List<HotKeyBean>>> network = searchModel.getHotKey();
 
         final Disposable subscribe = Observable.concat(MemoryCache.getInstance().<BaseResponse<List<HotKeyBean>>>get(TAG)
                 ,mDiskCache.<BaseResponse<List<HotKeyBean>>>get(TAG)

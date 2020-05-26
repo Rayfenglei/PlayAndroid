@@ -7,7 +7,7 @@ public class PlayViewConstants {
     public static final String PASSWORD = "password";
     public static final String LOGIN_STATE = "login_state";
 
-    public static final int REQUEST_ARTICLE_ACTIVITY = 0;
+    public static final int REQUEST_ARTICLE_ACTIVITY = 2;
     public static final int REQUEST_BANNER = 1;
     public static final String ARTICLE_COLLECT = "article_collect";
     /**

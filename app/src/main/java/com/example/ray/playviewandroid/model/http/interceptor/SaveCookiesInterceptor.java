@@ -1,18 +1,13 @@
 package com.example.ray.playviewandroid.model.http.interceptor;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
-import com.example.ray.playviewandroid.PlayApplication;
+import androidx.annotation.NonNull;
+
 import com.example.ray.playviewandroid.util.SharedPreferencesUtils;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import okhttp3.Interceptor;
-import okhttp3.Request;
 import okhttp3.Response;
 /**
  * 保存cookie

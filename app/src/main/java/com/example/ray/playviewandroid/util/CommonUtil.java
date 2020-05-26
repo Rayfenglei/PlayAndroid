@@ -27,10 +27,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
+
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.example.ray.playviewandroid.PlayApplication;
 import com.example.ray.playviewandroid.R;

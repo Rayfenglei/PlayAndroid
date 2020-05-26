@@ -1,19 +1,19 @@
 package com.example.ray.playviewandroid.view.fragment.login;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseFragment;
 import com.example.ray.playviewandroid.presenter.login.LoginRegisterPresenter;
 import com.example.ray.playviewandroid.view.activity.LoginActivity;
-import com.example.ray.playviewandroid.view.fragment.login.LoginFragment;
 import com.example.ray.playviewandroid.view.interfaces.ILoginRegisterView;
 
 public class RegisterFragment extends BaseFragment<ILoginRegisterView, LoginRegisterPresenter<ILoginRegisterView>> implements ILoginRegisterView,View.OnClickListener {

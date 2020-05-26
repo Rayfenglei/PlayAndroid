@@ -1,14 +1,15 @@
 package com.example.ray.playviewandroid;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
+
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.ray.playviewandroid.presenter.login.LoginRegisterPresenter;
 import com.example.ray.playviewandroid.util.PermissionsUtil;
 import com.example.ray.playviewandroid.view.activity.LoginActivity;
-import com.example.ray.playviewandroid.view.activity.MainActivity;
 
 
 public class SplashActivity extends AppCompatActivity {

@@ -1,0 +1,27 @@
+ext{
+
+    dependVersion   =   [
+            okhttp  :   '3.12.1',
+            recyclerview    :   '28.0.0'
+    ]
+
+    dependencies = [
+            okhttp    :   "com.squareup.okhttp3:okhttp:${dependVersion.okhttp}",
+            recyclerview  : 'androidx.recyclerview:recyclerview:1.0.0',
+            rxjava  :   'io.reactivex.rxjava2:rxjava:2.2.8',
+            rxandroid   :   'io.reactivex.rxjava2:rxandroid:2.1.1',
+            retrofit    :   'com.squareup.retrofit2:retrofit:2.5.0',
+            converterGson :   'com.squareup.retrofit2:converter-gson:2.5.0',
+            adapterRxjava2 :   'com.squareup.retrofit2:adapter-rxjava2:2.5.0',
+            eventbus    :   'org.greenrobot:eventbus:3.1.1',
+            glide   :   'com.github.bumptech.glide:glide:4.9.0',
+            compiler    :   'com.github.bumptech.glide:compiler:4.9.0',
+            fastjson    :   'com.alibaba:fastjson:1.2.57',
+            design  :   'com.android.support:design:28.0.0',
+            banner  :   'com.youth.banner:banner:1.4.10',
+            agentweb    :   'com.just.agentweb:agentweb:4.0.3-alpha@aar',
+            roundedimageview    :   'com.makeramen:roundedimageview:2.2.1',
+            SmartRefreshLayout   :   'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7',
+            SmartRefreshHeader  :   'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7',
+    ]
+}

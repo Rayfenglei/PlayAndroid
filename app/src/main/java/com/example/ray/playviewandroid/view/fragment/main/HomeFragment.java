@@ -1,27 +1,23 @@
 package com.example.ray.playviewandroid.view.fragment.main;
 
-
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-
-import com.example.ray.playviewandroid.PlayApplication;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseFragment;
 import com.example.ray.playviewandroid.bean.ArticleBean;
@@ -34,10 +30,12 @@ import com.example.ray.playviewandroid.util.NetworkUtil;
 import com.example.ray.playviewandroid.util.SharedPreferencesUtils;
 import com.example.ray.playviewandroid.view.activity.ArticleActivity;
 import com.example.ray.playviewandroid.view.activity.LoginActivity;
+import com.example.ray.playviewandroid.view.activity.MainActivity;
 import com.example.ray.playviewandroid.view.activity.SearchActivity;
 import com.example.ray.playviewandroid.view.adapter.HomeAdapter;
 import com.example.ray.playviewandroid.view.adapter.RecyclerOnScrollListener;
 import com.example.ray.playviewandroid.view.interfaces.IHomeView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -323,7 +321,7 @@ public class HomeFragment extends BaseFragment<IHomeView, HomePresenter<IHomeVie
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         Pair<View, String> etPair = new Pair<>((View) etSearchBar, getString(R.string.trans_edit));
         Pair<View, String> imPair = new Pair<>((View) imSearchBar, getString(R.string.trans_image));
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), imPair, etPair);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),etPair,imPair);
         startActivity(intent, options.toBundle());
     }
 

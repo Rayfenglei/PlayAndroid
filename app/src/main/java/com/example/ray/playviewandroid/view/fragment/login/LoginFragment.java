@@ -1,9 +1,7 @@
 package com.example.ray.playviewandroid.view.fragment.login;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseFragment;
 import com.example.ray.playviewandroid.constants.PlayViewConstants;
@@ -19,8 +18,6 @@ import com.example.ray.playviewandroid.presenter.login.LoginRegisterPresenter;
 import com.example.ray.playviewandroid.util.SharedPreferencesUtils;
 import com.example.ray.playviewandroid.view.activity.LoginActivity;
 import com.example.ray.playviewandroid.view.interfaces.ILoginRegisterView;
-
-import static android.app.Activity.RESULT_OK;
 
 public class LoginFragment extends BaseFragment<ILoginRegisterView, LoginRegisterPresenter<ILoginRegisterView>> implements ILoginRegisterView,View.OnClickListener{
     private EditText etUser;

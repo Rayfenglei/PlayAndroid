@@ -1,26 +1,20 @@
 package com.example.ray.playviewandroid.view.activity;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.util.Pair;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import androidx.annotation.Nullable;
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseActivity;
 import com.example.ray.playviewandroid.bean.ArticleBean;
 import com.example.ray.playviewandroid.bean.HotKeyBean;
 import com.example.ray.playviewandroid.bean.HotWebBean;
+import com.example.ray.playviewandroid.constants.PlayViewConstants;
 import com.example.ray.playviewandroid.presenter.login.SearchPresenter;
-import com.example.ray.playviewandroid.util.LogUtil;
+
 import com.example.ray.playviewandroid.view.defineview.FlowLayout;
 import com.example.ray.playviewandroid.view.interfaces.ISearchView;
 import java.util.ArrayList;

@@ -3,21 +3,17 @@ package com.example.ray.playviewandroid.view.fragment.main;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseFragment;
@@ -85,7 +81,7 @@ public class SystemFragment extends BaseFragment<ISystemView, SystemPresenter<IS
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.et_searcher_bar){
-            startActivity(new Intent(getContext(), SearchActivity.class));
+            toSearchActivity();
         }
     }
 

@@ -1,19 +1,22 @@
 package com.example.ray.playviewandroid.view.activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseActivity;
 import com.example.ray.playviewandroid.base.BasePresenter;
+import com.example.ray.playviewandroid.constants.PlayViewConstants;
+import com.example.ray.playviewandroid.util.LogUtil;
 import com.example.ray.playviewandroid.view.adapter.NavigationAdapter;
 import com.example.ray.playviewandroid.view.fragment.main.HomeFragment;
 import com.example.ray.playviewandroid.view.fragment.main.MyFragment;
 import com.example.ray.playviewandroid.view.fragment.main.ProjectFragment;
 import com.example.ray.playviewandroid.view.fragment.main.PublicFragment;
 import com.example.ray.playviewandroid.view.fragment.main.SystemFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,5 +102,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         //打开指定界面
         mTabLayout.getTabAt(0).select();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.i("fltest", " " + data.getBooleanExtra(PlayViewConstants.ARTICLE_COLLECT, false));
     }
 }

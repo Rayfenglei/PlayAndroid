@@ -4,19 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import com.example.ray.playviewandroid.R;
 import com.example.ray.playviewandroid.base.BaseActivity;
 import com.example.ray.playviewandroid.base.BasePresenter;
 import com.example.ray.playviewandroid.bean.FirstSystemBean;
 import com.example.ray.playviewandroid.view.adapter.DetailViewpagerAdapter;
 import com.example.ray.playviewandroid.view.fragment.main.SystemDetailFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
